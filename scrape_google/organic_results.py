@@ -1,7 +1,9 @@
 import __main__
 import pandas as pd
 import urllib, re, os, shutil
-from datetime import datetime 
+from datetime import datetime
+import scrapy
+from scrapy import Selector
 
 def get_organic_results(extract_keyword, response):
     #get link
@@ -11,22 +13,29 @@ def get_organic_results(extract_keyword, response):
     div_obj = {}
     div_obj['Position'] = []
     div_obj['Keyword'] = []
-    #div_obj['Titles'] = []
-    #div_obj['Links'] = []
-    result_in_page = response.xpath('//*[@id="rso"]/div[@class="g"]').getall()
+    div_obj['Titles'] = []
+    div_obj['Links'] = []
+    results_in_page = response.xpath('//*[@id="rso"]/div[@class="g"]')
+    print(results_in_page)
 
-    for organic_result in result_in_page:
+    for index, result_in_page in enumerate(results_in_page):
+    #for organic_result in result_in_page:
         #print(type(organic_result))
 
-        #poszione
+        # posizione
         div_obj['Position'].append(position)
         position += 1
 
-        #keyword
+        # keyword
         div_obj['Keyword'].append(extract_keyword)
 
+        # title snippet
+        title_snippet = result_in_page.xpath('.//h3/text()').get()
+        div_obj['Titles'].append(title_snippet)
 
-
+        # link snippet
+        link_snippet = result_in_page.xpath('.//a/@href').get()
+        div_obj['Links'].append(link_snippet)
 
     print(div_obj)
     

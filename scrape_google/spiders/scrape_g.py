@@ -1,7 +1,6 @@
 # https://github.com/TeamHG-Memex/scrapy-rotating-proxies#usage
 
 import scrapy
-from scrapy.linkextractors import LinkExtractor
 from scrapy import Selector
 import urllib, re, os, shutil
 from datetime import datetime
