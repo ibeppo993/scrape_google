@@ -115,3 +115,4 @@ dmypy.json
 
 # output folder
 /scrape_google/spiders/output
+/scrape_google/spiders/kw_list.txt
