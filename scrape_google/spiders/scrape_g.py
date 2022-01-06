@@ -10,11 +10,11 @@ from scrape_google.organic_results import get_organic_results
 from scrape_google.prepare_scraper import create_folder, read_keywords
 
 # creazione cartella output
-output_folder = 'output'
+output_folder = 'spiders/output'
 create_folder(output_folder)
 
 # creazione lista keyword
-keywords_from_file = 'kw_list.txt'
+keywords_from_file = 'spiders/kw_list.txt'
 kw_list = read_keywords(keywords_from_file)
 print(kw_list)
 
@@ -52,7 +52,7 @@ class ScrapeGSpider(scrapy.Spider):
         print(extract_keyword)
 
         # save HTML file
-        with open(f'output/{extract_keyword}.html', 'wb') as html_file:
+        with open(f'{output_folder}/{extract_keyword}.html', 'wb') as html_file:
             html_file.write(response.body)
 
         
