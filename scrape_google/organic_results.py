@@ -31,6 +31,7 @@ def get_organic_results(extract_keyword, response):
 
         # title snippet
         title_snippet = result_in_page.xpath('.//h3/text()').get()
+        
         div_obj['Titles'].append(title_snippet)
 
         # link snippet
