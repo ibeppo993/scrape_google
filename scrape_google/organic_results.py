@@ -6,6 +6,9 @@ import scrapy
 from scrapy import Selector
 
 def get_organic_results(extract_keyword, response):
+
+    output_csv = 'spiders/output'
+
     #get link
     # //*[@id="rso"]/div[@class="g"]
     # //*[@id="rso"]/div[@class="hlcw0c"]
@@ -16,7 +19,7 @@ def get_organic_results(extract_keyword, response):
     div_obj['Titles'] = []
     div_obj['Links'] = []
     results_in_page = response.xpath('//*[@id="rso"]/div[@class="g"]')
-    print(results_in_page)
+    #print(results_in_page)
 
     for index, result_in_page in enumerate(results_in_page):
     #for organic_result in result_in_page:
@@ -45,4 +48,4 @@ def get_organic_results(extract_keyword, response):
     div_obj_df = pd.DataFrame(div_obj, index=None)
     #now = datetime.now()
     dt_string = datetime.now().strftime("%Y%m%d-%H")
-    div_obj_df.to_csv(f'output/{dt_string}_organic_result.csv', mode='a', header=False, index=False, encoding='UTF-8', sep='\t')
+    div_obj_df.to_csv(f'{output_csv}/{dt_string}_organic_result.csv', mode='a', header=False, index=False, encoding='UTF-8', sep='\t')

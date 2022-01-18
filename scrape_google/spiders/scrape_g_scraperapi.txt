@@ -10,6 +10,8 @@ from urllib.parse import urlencode
 from scrape_google.organic_results import get_organic_results
 from scrape_google.prepare_scraper import create_folder, read_keywords
 
+API_KEY = '4a06714621220b679dc19957462a7067'
+
 # creazione cartella output
 output_folder = 'spiders/output'
 create_folder(output_folder)
@@ -19,6 +21,10 @@ keywords_from_file = 'spiders/kw_list.txt'
 kw_list = read_keywords(keywords_from_file)
 print(kw_list)
 
+def get_scraperapi_url(url):
+    payload = {'api_key': API_KEY, 'url': url, 'render':'true', 'device_type':'desktop', 'keep_headers':'true', 'country_code':'it'}
+    proxy_url = 'http://api.scraperapi.com/?' + urlencode(payload)
+    return proxy_url
 
 # creazione lista url per lo scraping
 domain_search = 'www.google.it'
@@ -47,7 +53,7 @@ class ScrapeGSpider(scrapy.Spider):
 
     def start_requests(self):
         for url in urls_to_scrape:
-            yield scrapy.Request(url=url, callback=self.parse)
+            yield scrapy.Request(url=get_scraperapi_url(url), callback=self.parse)
 
     def parse(self, response):
 
