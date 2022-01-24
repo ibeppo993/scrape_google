@@ -114,5 +114,8 @@ dmypy.json
 .pyre/
 
 # output folder
-/scrape_google/spiders/output
-/scrape_google/spiders/kw_list.txt
+/scrape_google/spiders/output_html
+/scrape_google/spiders/teporary_file
+/scrape_google/spiders/config_file
+/scrape_google/spiders/keywords.txt
+/scrape_google/spiders/.env
