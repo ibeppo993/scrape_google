@@ -2,12 +2,12 @@ import __main__
 import pandas as pd
 import urllib, re, os, shutil
 from datetime import datetime
-import scrapy
-from scrapy import Selector
+#import scrapy
+#from scrapy import Selector
 
 def get_organic_results(extract_keyword, response):
 
-    output_csv = 'spiders/output'
+    output_csv = 'spiders/output_html'
 
     #get link
     # //*[@id="rso"]/div[@class="g"]
@@ -18,7 +18,9 @@ def get_organic_results(extract_keyword, response):
     div_obj['Keyword'] = []
     div_obj['Titles'] = []
     div_obj['Links'] = []
-    results_in_page = response.xpath('//*[@id="rso"]/div[@class="g"]')
+    #results_in_page = response.xpath('//*[@id="rso"]/div[@class="jtfYYd"]')
+    results_in_page = response.xpath('//div[@class="jtfYYd"][1]')
+
     #print(results_in_page)
 
     for index, result_in_page in enumerate(results_in_page):
